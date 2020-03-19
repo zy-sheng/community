@@ -27,27 +27,29 @@ public class AutoauthController {
     @Value("${github.client.secret}")
     private String ClientSecreat;
     @Value("${github.redirect.uri}")
-    private String RedirectUri ;
+    private String RedirectUri;
 
     //spring对象会事先将方法实例化放到容器里面
     @Autowired
     private UserMapper userMapper;
 
     @GetMapping("/callback")
-    public String callback(@RequestParam(name = "code")String code,
-                           @RequestParam(name = "state")String state,
+    public String callback(@RequestParam(name = "code") String code,
+                           @RequestParam(name = "state") String state,
                            HttpServletRequest request,
                            HttpServletResponse response
-                           ){
+    ) {
         AcessTokenDTO accessTokenDto = new AcessTokenDTO();
         accessTokenDto.setClient_id(ClientId);
         accessTokenDto.setClient_secret(ClientSecreat);
         accessTokenDto.setCode(code);
         accessTokenDto.setRedirect_uri(RedirectUri);
         accessTokenDto.setState(state);
-        String accessToken =gitHubProvider.getAccessToken(accessTokenDto);
+        String accessToken = gitHubProvider.getAccessToken(accessTokenDto);
         GetHubUser githubUser = gitHubProvider.getUser(accessToken);
-        if (githubUser!=null){
+
+        //注意此处缺一个判断gitHubUser.getId()!=null
+        if (githubUser != null) {
             User user = new User();
             String token = UUID.randomUUID().toString();
             user.setToken(token);
@@ -55,16 +57,17 @@ public class AutoauthController {
             user.setAccountId(String.valueOf(githubUser.getId()));
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
+            user.setAvatarUrl(githubUser.getAvatar_url());
             //插入数据库，完成写入
             userMapper.insert(user);
             //登录成功，写cookie和Sesison
-            response.addCookie(new Cookie("token",token)); //写入token
+            response.addCookie(new Cookie("token", token)); //写入token
 
 
-           // request.getSession().setAttribute("user",githubUser);
+            // request.getSession().setAttribute("user",githubUser);
             return "redirect:/";
 
-        }else{
+        } else {
             return "redirect:/";
             //登录失败，重新写入
         }
