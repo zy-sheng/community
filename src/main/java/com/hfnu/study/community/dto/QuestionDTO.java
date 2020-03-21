@@ -8,12 +8,12 @@ public class QuestionDTO {
     private Integer id;
     private String title;
     private String description;
-    private long gmt_create;
-    private long gmt_modified;
+    private long gmtCreate;
+    private long gmtModified;
     private Integer createor;
-    private Integer comment_account;
-    private Integer view_account;
-    private Integer like_count;
+    private Integer commentAccount;
+    private Integer viewAccount;
+    private Integer likeCount;
     private String tags;
     private User user;
 
