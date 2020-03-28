@@ -10,6 +10,7 @@
 [bootstrap文档](https://v3.bootcss.com/)
 [Springboot继承数据库的文档](https://docs.spring.io/spring-boot/docs/2.0.0.RC1/reference/htmlsingle/#boot-features-sql)
 [thymeleaf](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#setting-attribute-values)
+[拦截器interception_SpringMvc](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-handlermapping-interceptor)
 ##工具
 [github下载](https://github.com/download)
 [bootstrap下载](https://codeload.github.com/twbs/bootstrap/zip/v3.3.7)

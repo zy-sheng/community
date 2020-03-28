@@ -2,9 +2,9 @@ package com.hfnu.study.community.controller;
 
 import com.hfnu.study.community.dto.AcessTokenDTO;
 import com.hfnu.study.community.dto.GetHubUser;
-import com.hfnu.study.community.mapper.UserMapper;
 import com.hfnu.study.community.model.User;
 import com.hfnu.study.community.provider.GitHubProvider;
+import com.hfnu.study.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -22,6 +22,9 @@ public class AutoauthController {
     @Autowired
     private GitHubProvider gitHubProvider;
 
+    @Autowired
+    private UserService userService;
+
     @Value("${github.client.id}")
     private String ClientId;
     @Value("${github.client.secret}")
@@ -30,8 +33,7 @@ public class AutoauthController {
     private String RedirectUri;
 
     //spring对象会事先将方法实例化放到容器里面
-    @Autowired
-    private UserMapper userMapper;
+
 
     @GetMapping("/callback")
     public String callback(@RequestParam(name = "code") String code,
@@ -58,8 +60,9 @@ public class AutoauthController {
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
             user.setAvatarUrl(githubUser.getAvatar_url());
-            //插入数据库，完成写入
-            userMapper.insert(user);
+            //每次都是创建一个新用户
+            userService.createOrUpdate(user);
+
             //登录成功，写cookie和Sesison
             response.addCookie(new Cookie("token", token)); //写入token
 
@@ -74,4 +77,15 @@ public class AutoauthController {
 
     }
 
+    @GetMapping("/logOut")
+    public String logOut(HttpServletRequest request,
+                         HttpServletResponse response
+
+    ){
+        request.getSession().removeAttribute("user");
+        Cookie cookie = new Cookie("token",null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
+    }
 }

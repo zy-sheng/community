@@ -19,29 +19,17 @@ public class PaginationDTO {
     private Integer totalPage;
 
 
-    public void setPagination(Integer totalCount, Integer page, Integer size) {
-
-
-        if (totalCount % size == 0) {
-            totalPage = totalCount / size;
-        } else {
-            totalPage = totalCount / size + 1;
-        }
-
-        if (page < 1) {
-            page = 1;
-        }
-        if (page > totalPage) {
-            page = totalPage;
-        }
+    public void setPagination(Integer totalPage, Integer page) {
+        this.totalPage =totalPage;
         this.page = page;
 
         pages.add(page);
+        // qian san ye  hou san ye
         for (int i = 1; i <= 3; i++) {
             if (page - i > 0) {
                 pages.add(0, page - i);
             }
-            if (page + 1 <= totalPage) {
+            if (page + i <= totalPage) {
                 pages.add(page + i);
             }
         }
