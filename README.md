@@ -11,8 +11,12 @@
 [Springboot继承数据库的文档](https://docs.spring.io/spring-boot/docs/2.0.0.RC1/reference/htmlsingle/#boot-features-sql)
 [thymeleaf](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#setting-attribute-values)
 [拦截器interception_SpringMvc](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-handlermapping-interceptor)
+[localStorage](https://www.runoob.com/jsref/prop-win-localstorage.html)
 ##工具
 [github下载](https://github.com/download)
 [bootstrap下载](https://codeload.github.com/twbs/bootstrap/zip/v3.3.7)
 [Visual-paradigm](http://www.visual-paradigm.com)
 [lombok可以自动补全类的方法](https://projectlombok.org/)
+[谷歌商店](chrome-extension://coohjcphdfgbiolnekdpbcijmhambjff/index.html)
+##脚本
+[运行mybatisGenerator](mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate)

@@ -9,8 +9,16 @@
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.min.js" type="application/javascript"></script>
 </head>
+<script type="application/javascript">
+    var closable = window.localStorage.getItem("closable");
+    if (closable == "true") {
+        window.close();
+        window.localStorage.removeItem("closable");
+    }
+
+</script>
 <body>
-<div th:insert = "~{navigation::nav}"></div>
+<div th:insert="~{navigation::nav}"></div>
 
 <div class="container-fluid main">
     <div class="row">
@@ -24,13 +32,13 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading" >
+                    <h4 class="media-heading">
                         <a th:href="@{'/question/'+${question.id}}" th:text="${question.title}"></a>
 
                     </h4>
                     <span th:text="${question.description}"></span><br>
                     <span class="text-dec"> <span th:text="${question.commentAccount}"></span>个回复·
-                       <span th:text="${question.viewAccount}"></span>人浏览·
+                       <span th:text="${question.viewAccount}"></span>次浏览·
                        <span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span></span>
                 </div>
             </div>

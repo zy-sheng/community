@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hfnu.study.community.mapper.QuestionExtMapper">
+  <resultMap id="BaseResultMap" type="com.hfnu.study.community.model.Question">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="BIGINT" property="gmtModified" />
+    <result column="createor" jdbcType="INTEGER" property="createor" />
+    <result column="comment_account" jdbcType="INTEGER" property="commentAccount" />
+    <result column="view_account" jdbcType="INTEGER" property="viewAccount" />
+    <result column="like_count" jdbcType="INTEGER" property="likeCount" />
+    <result column="tags" jdbcType="VARCHAR" property="tags" />
+  </resultMap>
+  <update id="incView" parameterType="com.hfnu.study.community.model.Question">
+    update question
+    set
+    view_account = view_account + #{viewAccount,jdbcType=INTEGER}
+    where id = #{id}
+  </update>
+  <update id="incCommentCount" parameterType="com.hfnu.study.community.model.Question">
+    update question
+    set
+    comment_account = comment_account + #{commentAccount,jdbcType=INTEGER}
+    where id = #{id}
+  </update>
+</mapper>
