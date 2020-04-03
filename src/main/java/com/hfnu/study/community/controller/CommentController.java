@@ -5,6 +5,7 @@ import com.hfnu.study.community.dto.CommentDTO;
 import com.hfnu.study.community.dto.ResultDTO;
 import com.hfnu.study.community.enums.CommentTypeEnum;
 import com.hfnu.study.community.exception.CustomizeErrorCode;
+import com.hfnu.study.community.mapper.CommentExtMapper;
 import com.hfnu.study.community.model.Comment;
 import com.hfnu.study.community.model.User;
 import com.hfnu.study.community.service.CommentService;
@@ -21,6 +22,8 @@ public class CommentController {
 
     @Autowired
     private CommentService commentService;
+
+
 
     @ResponseBody
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
@@ -45,7 +48,6 @@ public class CommentController {
         comment.setCommentor(user.getId());
         comment.setLikeAccount(0);
         commentService.insert(comment);
-
         return ResultDTO.okOf();
 
 

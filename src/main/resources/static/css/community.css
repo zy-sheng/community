@@ -72,6 +72,11 @@ body{
     font-size: 15px;
     cursor: pointer;
 }
+.commentAccount-st{
+    margin-left: -6px;
+    display: inherit;
+
+}
 .comment-st .active{
     color: #499ef3;
 }

@@ -63,24 +63,64 @@ function CollapseComment(e) {
         /*使用js删除和添加类名*/
         e.classList.remove("active");
     } else {
-            $.getJSON( "/comment/"+id, function( data ) {
-                console.log(data);
+             var subCommentContainer = $("#comment-"+id);
+             if(subCommentContainer.children().length != 1){
+                 //展开二级评论 其中.addClass()向被选元素添加一个类获多个类comments
+                 comments.addClass("in");
+                 e.setAttribute("data-collapse", "in");
+                 e.classList.add("active");
+             }
+             else{
+                 $.getJSON( "/comment/"+id, function( data ) {
+                     console.log(data);
+                     $.each( data.data.reverse(), function( index , comment ) {
 
 
-                $.each( data, function( key, val ) {
-                    items.push( "<li id='" + key + "'>" + val + "</li>" );
-                });
+                         //这里使用到ctrl+alt将变量移到内部
+                         var mediaLeftElement = $("<div/>",{
+                             "class" : "media-left"
+                         }).append($("<img/>", {
+                             "class": "media-object img-rounded",
+                             "src": comment.user.avatarUrl
+                         }));
 
-                $( "<ul/>", {
-                    "class": "my-new-list",
-                    html: items.join( "" )
-                }).appendTo( "body" );
 
-                //展开二级评论 其中.addClass()向被选元素添加一个类获多个类comments
-                comments.addClass("in");
-                e.setAttribute("data-collapse", "in");
-                e.classList.add("active");
-        });
+                         //评论名
+                         var mediaBodyElemenet = $("<div/>",{
+                             "class" : "media-body"
+                         }).append($("<h6/>", {
+                             "class": "media-heading",
+                             "html": comment.user.name
+                         })).append($("<div/>", {
+                             "html":comment.content
+                         })).append($("<div/>", {
+                             "class" : "comment-st"
+                         }).append($("<span/>", {
+                             //时间
+                             "class" : "pull-right",
+                             "html" : moment(comment.gmtCreate).format('YYYY-MM-DD')
+                         })));
+
+                         var mediaElement = $("<div/>",{
+                             "class" : "media"
+                         }).append(mediaLeftElement)
+                             .append(mediaBodyElemenet);
+
+                         var commentElement = $("<div/>",{
+                             "class":"col-lg-12 col-md-12 col-sm-12 col-xs-12 comments",
+                             //在commentElement下加入mediaElement
+                         }).append(mediaElement);
+
+
+                         subCommentContainer.prepend(commentElement);
+                     });
+                     //展开二级评论 其中.addClass()向被选元素添加一个类获多个类comments
+                     comments.addClass("in");
+                     e.setAttribute("data-collapse", "in");
+                     e.classList.add("active");
+                 });
+
+             }
 
     }
 }

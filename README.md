@@ -19,4 +19,4 @@
 [lombok可以自动补全类的方法](https://projectlombok.org/)
 [谷歌商店](chrome-extension://coohjcphdfgbiolnekdpbcijmhambjff/index.html)
 ##脚本
-[运行mybatisGenerator](mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate)
+[运行mybatisGenerator]()mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
