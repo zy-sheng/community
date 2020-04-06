@@ -124,3 +124,22 @@ function CollapseComment(e) {
 
     }
 }
+
+function selectTags(value) {
+    //首先获得文本框的值
+    var tagText = $('#tag').val();
+    if (tagText.indexOf(value) != -1) {
+        //存在就不添加了
+    }else{
+        if (tagText) {
+            $('#tag').val(tagText + ',' + value);
+        } else {
+            $('#tag').val(value);
+        }
+    }
+}
+
+function showTagBorder(){
+   $("#select-tag").show();
+
+}

@@ -18,7 +18,7 @@ import java.util.UUID;
 
 @Controller
 //将当前类作为路由API得承载者
-public class AutoauthController {
+public class  AutoauthController {
     @Autowired
     private GitHubProvider gitHubProvider;
 

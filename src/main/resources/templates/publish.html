@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css"/>
     <link rel="stylesheet" href="/css/community.css"/>
     <script src="/js/jquery-3.4.1.min.js"></script>
-    <script src="/js/bootstrap.min.js" type="javascript"></script>
+    <script src="/js/community.js" type="application/javascript"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+
 </head>
 <body>
 <div th:insert="~{navigation::nav}"></div>
@@ -21,7 +23,7 @@
                     <input type="hidden" name="id" th:value="${id}">
                     <label for="title">问题标题</label>
                     <input type="text" class="form-control" id="title" th:value="${title}" name="title"
-                           placeholder="问题描述____">
+                           placeholder="问题描述____" autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label for="description">问题补充</label>
@@ -31,7 +33,24 @@
                 <div class="form-group">
                     <label for="tag">添加标签</label>
                     <input type="text" class="form-control" id="tag" th:value="${tag}" name="tag"
-                           placeholder="输入标签名，以,号隔开">
+                           placeholder="输入标签名，以,号隔开" autocomplete="off" onclick="showTagBorder()">
+
+                    <div id = "select-tag" style="display: none">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">编程语言</a></li>
+                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">页面框架</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="home">
+                                <span class="label label-info tag-rightDis"><span class="glyphicon glyphicon-tags tag-topDis " onclick="selectTags('Java')">Java</span></span>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="profile">
+                                <span class="label label-info tag-rightDis"><span class="glyphicon glyphicon-tags tag-topDis " onclick="selectTags('Spring')">spring</span></span>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
 
                 <span class="alert alert-danger col-lg-9 col-md-12 col-sm-12 col-xs-12" th:text="${error}"

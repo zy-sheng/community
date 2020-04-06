@@ -24,13 +24,16 @@ public class QuestionController {
     public String question(@PathVariable(name = "id") Long id, Model model){
 
         QuestionDTO questionDTO = questionService.getById(id);
+
+        List<QuestionDTO> reactedQuestions = questionService.selectReacted(questionDTO);
         //其中CommentDTO是页面传递过来的DTO需要重构一下
         List<CommentDTO> comments = commentService.listByTargetId(id, CommentTypeEnum.QUESTION);
         //传到页面
+        questionService.incView(id);
         model.addAttribute("question",questionDTO);
         model.addAttribute("comments",comments);
+        model.addAttribute("reactedQuestions",reactedQuestions);
         //阅读数累加
-        questionService.incView(id);
        return "question";
     }
 }

@@ -1,5 +1,7 @@
 package com.hfnu.study.community.dto;
 
+
+//授权对象
 public class AcessTokenDTO {
     private String client_id;
     private String client_secret;

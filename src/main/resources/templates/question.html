@@ -33,13 +33,24 @@
                 <div class="col-lg-12 col-md-12  col-sm-12 col-xs-12" th:text="${question.description}"></div>
                 <!--hr是一条水平线-->
                 <hr class="col-lg-12 col-md-12  col-sm-12 col-xs-12">
-                <a th:href="@{'/publish/'+${question.id} }" class="community-menu"
-                   th:if="${session.user!=null && session.user.id == question.createor}">
-                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                    编辑
-                </a>
-            </div>
 
+                <!--标签-->
+                <div class="col-lg-12 col-md-12  col-sm-12 col-xs-12" >
+                    <span class="label label-info tag-dis" th:each="tags:${question.tags.split(',')}">
+                        <span class="glyphicon glyphicon-tags"></span>
+                         <span class="label label-info" th:text="${tags}"></span>
+                    </span>
+                </div>
+
+                <hr class="col-lg-12 col-md-12  col-sm-12 col-xs-12">
+                <div class="col-lg-12 col-md-12  col-sm-12 col-xs-12" >
+                    <a th:href="@{'/publish/'+${question.id} }" class="community-menu"
+                       th:if="${session.user!=null && session.user.id == question.createor}">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true">编辑</span>
+                    </a>
+                </div>
+            </div>
+            <hr class="col-lg-12 col-md-12  col-sm-12 col-xs-12 editBottom-hr-st">
             <!--回复-->
 
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
@@ -61,7 +72,7 @@
                                 <span class="glyphicon glyphicon-hand-right icon"></span>
                                 <span th:data-id ="${comment.id}" onclick="CollapseComment(this)" >
                                 <span class="glyphicon glyphicon-comment icon" >
-                                    <span  class="commentAccount-st" th:text="${comment.commentAccount}"></span>
+                                    <span  class="commentAccount-s" th:text="${comment.commentAccount}"></span>
                                 </span>
                                 </span>
                                 <span class="pull-right"
@@ -137,9 +148,23 @@
                     </div>
                 </div>
             </div>
-            <hr>
+            <!--图片-->
+            <hr class="col-lg-12 col-md-12  col-sm-12 col-xs-12">
+            <div class="col-lg-12 col-md-12  col-sm-12 col-xs-12">
+                <h4>关注男神</h4>
+                <img src="/img/yt.jpg" class="img-thumbnail img-width">
+            </div>
+
+            <hr class="col-lg-12 col-md-12  col-sm-12 col-xs-12">
             <div class="col-lg-12 col-md-12  col-sm-12 col-xs-12">
                 <h4>相关问题</h4>
+                <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <ul class="question-related">
+                    <li th:each="related:${reactedQuestions}">
+                        <a th:href="@{'/question/'+${related.id}}" th:text="${related.title}">
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

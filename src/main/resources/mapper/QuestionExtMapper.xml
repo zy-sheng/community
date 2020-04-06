@@ -24,4 +24,11 @@
     comment_account = comment_account + #{commentAccount,jdbcType=INTEGER}
     where id = #{id}
   </update>
+
+  <select id="selectReacted" parameterType="com.hfnu.study.community.model.Question" resultMap="BaseResultMap">
+    select
+    *
+    from question
+    where id!=#{id} and tags regexp #{tags}
+  </select>
 </mapper>

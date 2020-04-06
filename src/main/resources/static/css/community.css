@@ -30,12 +30,33 @@ body{
 .profile .section{
     margin-top: 15px;
 }
+.tag-rightDis{
+    margin-right: 6px;
+}
+.tag-rightDis .tag-topDis{
+    margin-top: 7px;
+}
+
+.tag .active{
+    display: none;
+}
+
 
 .community-menu{
     color:#999;
     font-size: 13px;
     display: block;
     margin-bottom: 15px;
+}
+
+.question-related{
+    margin-left: 0;
+    padding-left: 0;
+    line-height: 24px;
+    list-style: none;
+}
+.editBottom-hr-st{
+    margin-top: 10px;
 }
 .jumbotron{
     margin:30px;
@@ -83,4 +104,8 @@ body{
 
 .comment-st .icon:hover{
     color: #499ef3;
+}
+
+.img-width{
+    width: 72%;
 }

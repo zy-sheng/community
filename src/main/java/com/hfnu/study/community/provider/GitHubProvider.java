@@ -11,6 +11,8 @@ import java.io.IOException;
 @Component
 //紧紧得将当前类初始化到容器得上下文,就等于说这个对象就自动得实例化放在了一个池子中
 public class GitHubProvider {
+
+    //实现post请求
     public String getAccessToken(AcessTokenDTO accessTokenDto){
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
 
@@ -31,6 +33,7 @@ public class GitHubProvider {
             }
             return null;
     }
+
     public GetHubUser getUser(String accessToken){
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
@@ -40,6 +43,7 @@ public class GitHubProvider {
             Response response = client.newCall(request).execute();
             String string =  response.body().string();
 
+            //自动得将string对象转化为java得一个类对象
             GetHubUser getHubUser = JSON.parseObject(string , GetHubUser.class);
             return getHubUser;
         } catch (IOException e) {
