@@ -21,7 +21,6 @@ public class IndexController {
                 Model model,
                  @RequestParam(name = "page",defaultValue = "1") Integer page,
                  @RequestParam(name = "size",defaultValue = "5") Integer size
-
                         )
     {
 

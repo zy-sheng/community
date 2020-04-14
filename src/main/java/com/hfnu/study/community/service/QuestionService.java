@@ -64,7 +64,7 @@ public class QuestionService {
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
-        paginationDTO.setQuestions(questionDTOList);
+        paginationDTO.setData(questionDTOList);
 
 
         return paginationDTO;
@@ -76,6 +76,7 @@ public class QuestionService {
         Integer totalPage;
         QuestionExample questionExample = new QuestionExample();
         questionExample.createCriteria().andCreateorEqualTo(userId);
+        //相当于select count(*) from question where id = userId
         Integer totalCount = (int) questionMapper.countByExample(questionExample);
         if (totalCount % size == 0 && totalCount != 0) {
             totalPage = totalCount / size;
@@ -105,7 +106,7 @@ public class QuestionService {
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
-        paginationDTO.setQuestions(questionDTOList);
+        paginationDTO.setData(questionDTOList);
 
 
         return paginationDTO;
@@ -135,13 +136,20 @@ public class QuestionService {
             questionMapper.insert(question);
         } else {
             //更新问题
+            Question dbQuestion = questionMapper.selectByPrimaryKey(question.getId());
+            if (dbQuestion == null) {
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
+
             Question updateQuestion = new Question();
             updateQuestion.setGmtModified(System.currentTimeMillis());
             updateQuestion.setTitle(question.getTitle());
             updateQuestion.setDescription(question.getDescription());
             updateQuestion.setTags(question.getTags());
             QuestionExample example = new QuestionExample();
-            example.createCriteria().andCreateorEqualTo(question.getId());
+            //查找到要修改的id
+            example.createCriteria().andIdEqualTo(question.getId());
+            //updateQuestion是修改数据所对应得对像
             int updated = questionMapper.updateByExampleSelective(updateQuestion, example);
             if (updated != 1) {
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);

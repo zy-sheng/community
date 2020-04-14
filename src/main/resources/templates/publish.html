@@ -25,27 +25,40 @@
                     <input type="text" class="form-control" id="title" th:value="${title}" name="title"
                            placeholder="问题描述____" autocomplete="off">
                 </div>
+
                 <div class="form-group">
                     <label for="description">问题补充</label>
                     <textarea name="description" id="description" th:text="${description}" class="form-control"
                               cols="30" rows="10"></textarea>
                 </div>
+
                 <div class="form-group">
                     <label for="tag">添加标签</label>
                     <input type="text" class="form-control" id="tag" th:value="${tag}" name="tag"
                            placeholder="输入标签名，以,号隔开" autocomplete="off" onclick="showTagBorder()">
 
-                    <div id = "select-tag" style="display: none">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">编程语言</a></li>
-                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">页面框架</a></li>
+                    <div id = "select-tag" class="publish-tag" >
+                        <ul class="nav nav-tabs" role="tablist" >
+                            <li role="presentation" th:each="selectCategory,selectCategotyStat:${tags}" th:class="${selectCategotyStat.first ? 'active':''} ">
+                                <a th:href="${'#'+selectCategory.categoryName} " aria-controls="home" role="tab"
+
+                                   data-toggle="tab" th:text="${selectCategory.categoryName}"></a>
+                            </li>
                         </ul>
                         <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="home">
-                                <span class="label label-info tag-rightDis"><span class="glyphicon glyphicon-tags tag-topDis " onclick="selectTags('Java')">Java</span></span>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="profile">
-                                <span class="label label-info tag-rightDis"><span class="glyphicon glyphicon-tags tag-topDis " onclick="selectTags('Spring')">spring</span></span>
+                            <div role="tabpanel" th:id="${selectCategory.categoryName}"
+                                 th:each="selectCategory:${tags}"
+                                 th:class="${selectCategoryStat.first ? 'active tab-pane':'tab-pane'}  ">
+                                <span>
+                                <span class="label label-info tag-rightDis"
+                                      th:each="selectTag : ${selectCategory.tags}">
+                                    <span class="glyphicon glyphicon-tags tag-topDis "
+                                          onclick="selectTags(this)" th:data-tag="${selectTag}"
+                                          th:text="${' '+selectTag}">
+
+                                    </span>
+                                </span>
+                                </span>
                             </div>
                         </div>
 

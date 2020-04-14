@@ -47,10 +47,11 @@ public class  AutoauthController {
         accessTokenDto.setCode(code);
         accessTokenDto.setRedirect_uri(RedirectUri);
         accessTokenDto.setState(state);
+        //使用githubProvider获得一个accessToken
         String accessToken = gitHubProvider.getAccessToken(accessTokenDto);
         GetHubUser githubUser = gitHubProvider.getUser(accessToken);
 
-        //注意此处缺一个判断gitHubUser.getId()!=null
+
         if (githubUser != null) {
             User user = new User();
             String token = UUID.randomUUID().toString();
@@ -71,8 +72,8 @@ public class  AutoauthController {
             return "redirect:/";
 
         } else {
-            return "redirect:/";
             //登录失败，重新写入
+            return "redirect:/";
         }
 
     }

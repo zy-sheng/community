@@ -39,6 +39,7 @@ public class CommentController {
         if(commentCreateDTO == null || StringUtils.isBlank(commentCreateDTO.getContent())){
             return ResultDTO.errorOf(CustomizeErrorCode.CONNENT_IS_EMPTY);
         }
+
         Comment comment = new Comment();
         comment.setParentId(commentCreateDTO.getParentId());
         comment.setContent(commentCreateDTO.getContent());
@@ -47,11 +48,10 @@ public class CommentController {
         comment.setGmtModified(System.currentTimeMillis());
         comment.setCommentor(user.getId());
         comment.setLikeAccount(0);
-        commentService.insert(comment);
+        commentService.insert(comment , user);
         return ResultDTO.okOf();
-
-
     }
+
     @ResponseBody
     @RequestMapping(value = "/comment/{id}", method = RequestMethod.GET)
     public ResultDTO<List> comments(@PathVariable(name = "id") Long id

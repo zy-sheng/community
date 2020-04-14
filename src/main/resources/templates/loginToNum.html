@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Community</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="css/community.css"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.min.js" type="application/javascript"></script>
+    <script src="js/community.js" type="application/javascript"></script>
+
+</head>
+<body class="login-background">
+
+<div class="login-form">
+<form class="form-inline" action="/vertifyLogin" method="get">
+    <div class="form-group">
+        <input type="text" class="form-control num" name="num" id="num" placeholder="请输入手机号" autocomplete="off">
+    </div>
+    <br>
+    <div class="form-group">
+        <input type="text" class="form-control" id="psd" name = "psd" placeholder="请输入密码" autocomplete="off">
+
+    </div>
+    <br>
+    <div class="form-group">
+        <input type="text" class="form-control" id="code" name = "code" placeholder="请输入验证码" autocomplete="off">
+
+    </div>
+    <button type="button" class="btn btn-default code-send"   id="btn" >发送验证码</button>
+    <br>
+    <div class="login-button">
+    <input type = "submit"  th:value = "登录"/>
+    </div>
+</form>
+</div>
+</body>
+</html>

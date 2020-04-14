@@ -119,14 +119,13 @@ function CollapseComment(e) {
                      e.setAttribute("data-collapse", "in");
                      e.classList.add("active");
                  });
-
              }
-
     }
 }
 
-function selectTags(value) {
+function selectTags(e) {
     //首先获得文本框的值
+    var value = e.getAttribute("data-tag");
     var tagText = $('#tag').val();
     if (tagText.indexOf(value) != -1) {
         //存在就不添加了
@@ -143,3 +142,5 @@ function showTagBorder(){
    $("#select-tag").show();
 
 }
+
+

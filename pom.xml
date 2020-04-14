@@ -51,6 +51,16 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.66</version>
         </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>4.4.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-ecs</artifactId>
+            <version>4.17.6</version>
+        </dependency>
 
         <!--搜索你的mysql版本对应的mysql-connector-java应该就可以了-->
 
