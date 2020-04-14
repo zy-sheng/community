@@ -152,3 +152,7 @@ body{
     height: 100%;
     background: url("/img/engineer.jpg");
 }
+
+.profile-notify_dis{
+    margin-left: 4px;
+}
