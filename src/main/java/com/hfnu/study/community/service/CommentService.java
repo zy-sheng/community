@@ -77,6 +77,7 @@ public class CommentService {
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
             //插入一个评论，更新评论数
+            comment.setCommentAccount(0);
             commentMapper.insert(comment);
             question.setCommentAccount(1);
             questionExtMapper.incCommentCount(question);
@@ -89,6 +90,10 @@ public class CommentService {
     }
 
     private void createNotify(Comment comment, Long receiver, String notifierName, String outerTitle, NotificationTypeEnums notificationType, Long outerId) {
+
+        if(receiver == comment.getCommentor()){
+            return;
+        }
         Notification notification = new Notification();
         notification.setGmtCreate(System.currentTimeMillis());
         notification.setType(notificationType.getType());
@@ -97,7 +102,6 @@ public class CommentService {
         //通知者，当前我的评论人
         notification.setNotifer(comment.getCommentor());
         notification.setStatus(NotificationStatusEnums.UNREAD.getState());
-
         notification.setReceiver(receiver);
         notification.setNotifierName(notifierName);
         notification.setOuterTitle(outerTitle);
